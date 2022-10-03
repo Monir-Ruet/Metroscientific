@@ -107,7 +107,7 @@ Now Copy the kernel Image in this directory.
 ## Qemu Running...
 
 ```bash
-qemu-system-aarch64 -smp 2 -M virt -m 1024 -cpu cortex-a53 -kernel Image -append 'root=/dev/vda console=ttyAMA0' -drive if=none,file=disk.img,id=hd0 -device virtio-blk-device,drive=hd0  -netdev user,id=mynet -device virtio-net-pci,netdev=mynet -nographic
+qemu-system-aarch64 -smp 2 -M virt -m 1024 -cpu cortex-a53 -kernel Image -append 'root=/dev/vda rw console=ttyAMA0' -drive if=none,file=disk.img,id=hd0 -device virtio-blk-device,drive=hd0  -netdev user,id=mynet -device virtio-net-pci,netdev=mynet -nographic
 ```
 
 
