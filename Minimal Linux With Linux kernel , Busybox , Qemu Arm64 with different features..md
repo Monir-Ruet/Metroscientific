@@ -41,7 +41,7 @@ make ARCH=arm64 CROSS_COMPILE=aarch64-linux-gnu- menuconfig
 Remember to mark Build static binary ( no shared libs) . Save and Exit.
 
 ```bash
-make ARCH=arm64 CROSS_COMPILE=aarch64-linux-gnu- -j($nproc)
+make ARCH=arm64 CROSS_COMPILE=aarch64-linux-gnu- -j$(nproc)
 ```
 
 ## Building the root filesystem
