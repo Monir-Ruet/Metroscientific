@@ -4,22 +4,7 @@
 
 ## Kernel
 
-##### Download
-
-```bash
-wget https://cdn.kernel.org/pub/linux/kernel/v5.x/linux-4.19.18.tar.xz
-tar -xjf linux-4.19.18.tar.xz
-```
-
-##### Build kernel
-
-```bash
-cd linux-5.19.12
-make ARCH=arm64 CROSS_COMPILE=aarch64-linux-gnu- defconfig
-make ARCH=arm64 CROSS_COMPILE=aarch64-linux-gnu- install -j$(nproc)
-```
-
-Now you will get the Image.
+To build the kernel Image you see my another doc.
 
 ## Busybox
 
