@@ -7,8 +7,8 @@
 ##### Download
 
 ```bash
-wget https://cdn.kernel.org/pub/linux/kernel/v5.x/linux-5.19.12.tar.xz
-tar -xjf linux-5.19.12.tar.xz
+wget https://cdn.kernel.org/pub/linux/kernel/v5.x/linux-4.19.18.tar.xz
+tar -xjf linux-4.19.18.tar.xz
 ```
 
 ##### Build kernel
@@ -16,7 +16,7 @@ tar -xjf linux-5.19.12.tar.xz
 ```bash
 cd linux-5.19.12
 make ARCH=arm64 CROSS_COMPILE=aarch64-linux-gnu- defconfig
-make ARCH=arm64 CROSS_COMPILE=aarch64-linux-gnu- install -j($nproc)
+make ARCH=arm64 CROSS_COMPILE=aarch64-linux-gnu- install -j$(nproc)
 ```
 
 Now you will get the Image.
@@ -27,9 +27,9 @@ Now you will get the Image.
 
 ```bash
 cd ..
-wget https://busybox.net/downloads/busybox-1.30.0.tar.bz2
-tar -xjf busybox-1.30.0.tar.bz2
-cd busybox-1.30.0
+wget https://busybox.net/downloads/busybox-1.35.0.tar.bz2
+tar -xjf busybox-1.35.0.tar.bz2
+cd busybox-1.35.0
 ```
 
 ##### Compile Busybox
@@ -56,7 +56,7 @@ mkdir rootfs
 Now we install BusyBox.
 
 ```bash
-cd busybox-1.30.0
+cd busybox-1.35.0
 make ARCH=aarch64 CROSS_COMPILE=aarch64-linux-gnu- install CONFIG_PREFIX=../rootfs
 cd ..
 cd rootfs
