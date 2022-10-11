@@ -167,6 +167,35 @@ Now this will be successful.
 
 We will get an Image. The image is located at `/arch/arm64/boot/`.
 
+### 9. Test system call
+Go to your home(~) directory using the following commands and create a `userspace.c` file.
+```bash
+cd ~
+gedit userspace.c
+```
+Write the following code in this file:
+```c
+#include <stdio.h>
+#include <linux/kernel.h>
+#include <sys/syscall.h>
+#include <unistd.h>
+int main()
+{
+         syscall(294);
+         syscall(295,10,20);
+         return 0;
+}
+```
+Now, compile and run the program:
+```bash
+gcc userspace.c -o userspace
+./userspace
+```
+Now, to check the message of your kernel run the following command:
+```bash
+sudo dmesg
+```
+This will show a Hello world message and a sum of two number.
 
-
+This ends the process of Adding a Hello World System Call to your Linux Kernel.
 If there needs modification , then any contribution is appreciated. Thanks.
