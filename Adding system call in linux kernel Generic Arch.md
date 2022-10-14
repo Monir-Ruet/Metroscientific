@@ -95,11 +95,16 @@ Add the system call defination in this header file. Add these line before #endif
 
 ```c
 asmlinkage long sys_hello(void);
-asmlinkage long sys_sym(int , int);
+asmlinkage long sys_sum(int , int);
 ```
 
 Add your new system call to the generic list by adding an entry to the list in `include/uapi/asm-generic/unistd.h`
 
+Open `include/uapi/asm-generic/unistd.h`
+```bash
+vi include/uapi/asm-generic/unistd.h
+```
+Put this lines
 ```c
 #define __NR_hello 294
 __SYSCALL(__NR_hello, sys_hello)
