@@ -69,6 +69,10 @@ mount -t proc none /proc
 mount -t sysfs none /sys
 echo /sbin/mdev > /proc/sys/kernel/hotplug
 /sbin/mdev -s
+ip addr add 10.0.2.15/24 dev eth0
+ip link set dev eth0 up
+ip route add default via 10.0.2.2 dev eth0
+
 ```
 
 Creating a filesystem disk
@@ -92,7 +96,7 @@ Now Copy the kernel Image in this directory.
 ## Qemu Running...
 
 ```bash
-qemu-system-aarch64 -smp 2 -M virt -m 1024 -cpu cortex-a53 -kernel Image -append 'root=/dev/vda rw console=ttyAMA0' -drive if=none,file=disk.img,id=hd0 -device virtio-blk-device,drive=hd0  -netdev user,id=mynet -device virtio-net-pci,netdev=mynet -nographic
+qemu-system-aarch64 -smp 2 -M virt -m 1024 -cpu cortex-a53 -kernel Image -append 'root=/dev/vda rw console=ttyAMA0' -drive if=none,file=disk.img,id=hd0 -device virtio-blk-device,drive=hd0  -netdev user,id=eyh0 -device virtio-net-pci,netdev=eth0 -nographic
 ```
 
 
