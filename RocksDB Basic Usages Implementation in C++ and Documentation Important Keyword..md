@@ -216,4 +216,59 @@ std::string str = s1.ToString();
 assert(str == std::string("hello"));
 ```
 
+###### FILE Upload in rocksdb in C/C++
+
+```c
+#include<bits/stdc++.h>
+#include<rocksdb/db.h>
+
+int main() {
+  FILE* file_in=fopen("Filepath","rb");
+  fseek(file_in, 0, SEEK_END);
+  long int file_size = ftell(file_in);
+  rewind(file_in);
+  char* buffer = (char*)malloc(file_size);
+  fread(buffer, file_size, 1, file_in);
+  rocksdb::Slice str(buffer,file_size);
+  std::string s=str.ToString();
+  // cout<<s<<'\n';
+  rocksdb::DB* db;
+  rocksdb::Options options;
+  options.create_if_missing = true;
+  rocksdb::Status status = rocksdb::DB::Open(options, "../rocksdb/db", &db);
+  assert(status.ok());
+  rocksdb::Slice key('key');
+  status=db->Put(rocksdb::WriteOptions(),key,str);
+  assert(status.ok());
+  std::string p;
+  status=db->Get(rocksdb::ReadOptions(),key,&p);
+  assert(status.ok());
+  std::cout<<p.size()<<'\n';
+}
+```
+
+###### Marge
+
+Marge needs lot of implementation. Like mongodb it should marge json, object.
+
+###### DeleteRange
+
+```c
+Slice start, end;
+// set start and end
+auto it = db->NewIterator(ReadOptions());
+
+for (it->Seek(start); cmp->Compare(it->key(), end) < 0; it->Next()) {
+  db->Delete(WriteOptions(), it->key());
+}
+```
+
+Instead you can use 
+
+```c
+Slice start, end;
+// set start and end
+db->DeleteRange(WriteOptions(), start, end);
+```
+
 
